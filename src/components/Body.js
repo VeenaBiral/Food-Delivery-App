@@ -22,7 +22,7 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
     setListOfResturant(restaurants);
-    setFilteredList(restaurants); // preserve original list
+    setFilteredList(restaurants);
   };
 
   const filterTopRated = () => {

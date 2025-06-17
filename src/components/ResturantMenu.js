@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { MENU_URL } from "../utils/constants";
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
 
 const ResturantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
@@ -37,18 +47,46 @@ const ResturantMenu = () => {
   const itemCards = menuCards.flatMap((card) => card?.card?.card?.itemCards || []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>{restaurantName}</h1>
-      <h2>{cuisines}</h2>
-      <h3>Menu</h3>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} - ₹{item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-          </li>
-        ))}        
-      </ul>
-    </div>
+    <Container maxWidth="md" sx={{ mt: 5 }}>
+      <Card elevation={4}>
+        <CardContent>
+          <Typography variant="h4" component="h1" gutterBottom>
+            {restaurantName}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+            {cuisines}
+          </Typography>
+
+          <Divider sx={{ my: 2 }} />
+
+          <Typography variant="h5" component="h2" gutterBottom>
+            Menu
+          </Typography>
+
+          <List>
+            {itemCards.map((item) => {
+              const name = item.card.info.name;
+              const price =
+                item.card.info.price / 100 || item.card.info.defaultPrice / 100;
+
+              return (
+                <ListItem
+                  key={item.card.info.id}
+                  divider
+                  secondaryAction={
+                    <Typography variant="body1" fontWeight="bold" color="green">
+                      ₹{price}
+                    </Typography>
+                  }
+                >
+                  <ListItemText primary={name} />
+                </ListItem>
+              );
+            })}
+          </List>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
