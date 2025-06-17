@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { createRoot } from 'react-dom/client';
+import Header from "./components/Header";
+import Body from "./components/Body";
+import { RouterProvider,createBrowserRouter, Outlet} from "react-router-dom";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Error from "./components/Error";
+import ResturantMenu from "./components/ResturantMenu";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+ return(
+  <div className="app"> 
+   <Header/>
+   <Outlet/>
+  </div>
+ )
 }
 
-export default App;
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+    children:[
+  {
+    path:"/",
+    element:<Body/>,
+  },
+  {
+    path:"/about",
+    element: <About/>
+  },
+  {
+    path:"/contact",
+    element: <Contact/>
+  },
+  {
+    path:"/resturants/:resId",
+    element: <ResturantMenu/>
+  }
+],
+    errorElement: <Error/>
+  }
+])
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+    <RouterProvider router={appRouter} />
+);
+
+export default appRouter;
