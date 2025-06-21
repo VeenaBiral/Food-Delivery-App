@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { LOGO_URL } from "../utils/constants";
+import { useSelector } from "react-redux";
+
 
 // Optional: Styled image
 const Logo = styled("img")({
@@ -12,6 +14,8 @@ const Logo = styled("img")({
 
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
+
+  const selector = useSelector( (store) => store.cart.items)
 
   return (
     <AppBar position="static" color="transparent" elevation={1}>
@@ -24,7 +28,7 @@ const Header = () => {
             <Button component={Link} to="/" color="inherit">Home</Button>
             <Button component={Link} to="/about" color="inherit">About Us</Button>
             <Button component={Link} to="/contact" color="inherit">Contact Us</Button>
-            <Typography variant="button">Cart</Typography>
+            <Typography component={Link} to="/cart" color="inherit">Cart-({selector.length} items) </Typography>
           </Box>
         </Box>
 

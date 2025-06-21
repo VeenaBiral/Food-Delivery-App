@@ -12,9 +12,9 @@ const Shimmer = () => {
               <Card sx={{ maxWidth: 345, margin: "auto", boxShadow: 3 }}>
                 <Skeleton variant="rectangular" height={180} />
                 <CardContent>
-                  <Skeleton variant="text" height={30} width="90%" />
-                  <Skeleton variant="text" height={20} width="70%" />
-                  <Skeleton variant="text" height={20} width="50%" />
+                  <Skeleton variant="text" height={30} width="100%" />
+                  <Skeleton variant="text" height={20} width="100%" />
+                  <Skeleton variant="text" height={20} width="100%" />
                 </CardContent>
               </Card>
             </Grid>

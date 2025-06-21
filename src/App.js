@@ -8,13 +8,17 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import ResturantMenu from "./components/ResturantMenu";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const App = () => {
  return(
+  <Provider store={appStore}>
   <div className="app"> 
    <Header/>
    <Outlet/>
   </div>
+  </Provider>
  )
 }
 
@@ -38,6 +42,10 @@ const appRouter = createBrowserRouter([
   {
     path:"/resturants/:resId",
     element: <ResturantMenu/>
+  },
+  {
+    path:"/cart",
+    element:<Cart/>
   }
 ],
     errorElement: <Error/>
